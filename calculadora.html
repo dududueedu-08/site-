@@ -3,24 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="">
-    <script src="jquery.js"></script>
+    <title>Calculadora</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-       
+        $(document).ready(function(){
+            let valorAtual = '';
+            let operador = '';
+            
+            // Atualiza o campo com o valor atual
+            function atualizarCampo() {
+                $('#campo').val(valorAtual);
+            }
+
+            // Adiciona números ao campo
+            $('.botao').click(function() {
+                valorAtual += $(this).text();
+                atualizarCampo();
+            });
+
+            // Operações matemáticas
+            $('#btn_somar').click(function() {
+                valorAtual += ' + ';
+                atualizarCampo();
+            });
+
+            $('#btn_subtrair').click(function() {
+                valorAtual += ' - ';
+                atualizarCampo();
+            });
+
+            $('#btn_multiplicar').click(function() {
+                valorAtual += ' * ';
+                atualizarCampo();
+            });
+
+            $('#btn_dividir').click(function() {
+                valorAtual += ' / ';
+                atualizarCampo();
+            });
+
+            // Adiciona ponto decimal
+            $('#btn_ponto').click(function() {
+                // Impede adicionar mais de um ponto
+                if (!valorAtual.includes('.')) {
+                    valorAtual += '.';
+                    atualizarCampo();
+                }
+            });
+
+            // Calcula o resultado
+            $('#btn_calcular').click(function() {
+                try {
+                    let resultado = eval(valorAtual); // Avalia a expressão
+                    valorAtual = resultado.toString(); // Converte o resultado para string
+                    atualizarCampo();
+                } catch (e) {
+                    valorAtual = 'Erro';
+                    atualizarCampo();
+                }
+            });
+
+            // Limpa o campo
+            $('#btn_limpar').click(function() {
+                valorAtual = '';
+                atualizarCampo();
+            });
+        });
     </script>
 </head>
 <body>
-   
+    <fieldset>
+        <legend>CALCULADORA</legend>
+        <input type="text" id="campo" readonly><br><br>
+
+        <!-- Botões numéricos -->
+        <button class="botao">1</button>
+        <button class="botao">2</button>
+        <button class="botao">3</button>
+        <button id="btn_somar">+</button><br><br>
+
+        <button class="botao">4</button>
+        <button class="botao">5</button>
+        <button class="botao">6</button>
+        <button id="btn_subtrair">-</button><br><br>
+
+        <button class="botao">7</button>
+        <button class="botao">8</button>
+        <button class="botao">9</button>
+        <button id="btn_multiplicar">*</button><br><br>
+
+        <button class="botao">0</button>
+        <button id="btn_ponto">.</button>
+        <button id="btn_calcular">=</button>
+        <button id="btn_dividir">/</button><br><br>
+
+        <!-- Botão de limpar -->
+        <button id="btn_limpar">C</button>
+    </fieldset>
 </body>
 </html>
-   <fieldset>
-    <legend>CALCULAD0RA</legend>
-    <input type="number" id="campo">
-    </fieldset>br><br>
-    <button id="btn_um">1</button>
-    <button id="btn_um">2</button>
-    <button id="btn_um">3</button>
-    <button id="btn_um">4</button>
-    <button id="btn_um">5</button>
-</fieldset>
