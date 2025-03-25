@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1500px;
+        }
+        .sidebar {
+            background-color: #2c2c2c;
+            width: 80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid #444;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .sidebar img {
+            width: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            filter: invert(100%); /* Ícones da barra lateral em branco */
+        }
+        .sidebar .logo {
+            width: 60px;
+            filter: invert(1); /* Logo invertida para branco */
+        }
+        .content {
+            margin-left: 80px; /* Para dar espaço para a barra lateral */
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .header img {
+            width: 120px;
+            cursor: pointer;
+            filter: invert(1); /* Logo invertida para branco */
+        }
+        .search-bar {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #444;
+            border-radius: 20px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+        .header .nav-icons img {
+            width: 30px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .stories {
+            display: flex;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        .story {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .story img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .story::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 3px solid #0099ff;
+            box-shadow: 0 0 8px rgba(0, 0, 255, 0.5);
+        }
+        .feed {
+            width: 100%;
+        }
+        .post {
+            background-color: #1f1f1f;
+            margin-bottom: 30px;
+            padding: 30px; /* Aumentei o tamanho da postagem */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .post-header img {
+            width: 60px; /* Aumentei o tamanho da foto de perfil */
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .post-header p {
+            margin: 0;
+            color: #fff; /* Nome em branco */
+            font-size: 18px; /* Aumentei o tamanho da fonte do nome */
+        }
+        .post-header span {
+            font-size: 12px;
+            color: #aaa;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+        .post-actions img {
+            width: 35px; /* Aumentei os ícones das ações */
+            cursor: pointer;
+        }
+        .like {
+            filter: invert(26%) sepia(82%) saturate(100%) hue-rotate(354deg) brightness(102%) contrast(101%); /* Coração vermelho */
+        }
+        .comment {
+            filter: invert(100%); /* Comentário branco */
+        }
+        .share {
+            filter: invert(100%); /* Compartilhar branco */
+        }
+        .sidebar-links {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar-links img {
+            margin-bottom: 20px;
+            width: 25px;
+        }
+        .friend {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+        .friend img {
+            width: 30px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .sidebar .sidebar-links a {
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .sidebar .sidebar-links a:hover {
+            color: #0099ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral -->
+        <div class="sidebar">
+            <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="Instagram Logo">
+            <div class="sidebar-links">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Home">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077037.png" alt="Explorar">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077036.png" alt="Reels">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077054.png" alt="Mensagens">
+                <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Notificações">
+            </div>
+        </div>
 
+        <!-- Conteúdo -->
+        <div class="content">
+            <!-- Header -->
+            <div class="header">
+                <img src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png" alt="Instagram Logo">
+                <input type="text" class="search-bar" placeholder="Pesquisar">
+                <div class="nav-icons">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Notificação">
+                    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Perfil">
+                </div>
+            </div>
+
+            <!-- Stories -->
+            <div class="stories">
+                <div class="story">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Story 1">
+                </div>
+                <div class="story">
+                    <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Story 2">
+                </div>
+                <div class="story">
+                    <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Story 3">
+                </div>
+                <div class="story">
+                    <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Story 4">
+                </div>
+            </div>
+
+            <!-- Feed -->
+            <div class="feed">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Foto de Perfil">
+                        <p><strong>Jean Lucca</strong>  <span>5 min atrás</span></p>
+                    </div>
+                    <div class="post-actions">
+                        <img class="like" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Curtir">
+                        <img class="comment" src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png" alt="Comentar">
+                        <img class="share" src="https://cdn-icons-png.flaticon.com/512/929/929564.png" alt="Compartilhar">
+                    </div>
+                    <pre>
+                       _____
+                     /       \
+                    |         |
+                    |  :)   |
+                    |         |
+                     \_______/
+                    </pre>
+                    <p>Jogando </p>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Foto de Perfil">
+                        <p><strong>Rhuan Pablo</strong>  <span>10 min atrás</span></p>
+                    </div>
+                    <div class="post-actions">
+                        <img class="like" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Curtir">
+                        <img class="comment" src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png" alt="Comentar">
+                        <img class="share" src="https://cdn-icons-png.flaticon.com/512/929/929564.png" alt="Compartilhar">
+                    </div>
+                    <pre>
+                       ______
+                     /       \
+                    |   O O   |
+                    |    -    |
+                    |   \_/   |
+                     \_______/
+                    </pre>
+                    <p>Outra legenda de postagem...</p>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Foto de Perfil">
+                        <p><strong>amigo_3</strong>  <span>15 min atrás</span></p>
+                    </div>
+                    <div class="post-actions">
+                        <img class="like" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Curtir">
+                        <img class="comment" src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png" alt="Comentar">
+                        <img class="share" src="https://cdn-icons-png.flaticon.com/512/929/929564.png" alt="Compartilhar">
+                    </div>
+                    <pre>
+                        _______
+                       /       \
+                      |   * *   |
+                      |    <    |
+                      |   ---   |
+                       \_______/
+                    </pre>
+                    <p>Mais uma legenda para a postagem...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
