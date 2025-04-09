@@ -1,104 +1,95 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            let valorAtual = '';
-            let operador = '';
-            
-            // Atualiza o campo com o valor atual
-            function atualizarCampo() {
-                $('#campo').val(valorAtual);
-            }
-
-            // Adiciona números ao campo
-            $('.botao').click(function() {
-                valorAtual += $(this).text();
-                atualizarCampo();
-            });
-
-            // Operações matemáticas
-            $('#btn_somar').click(function() {
-                valorAtual += ' + ';
-                atualizarCampo();
-            });
-
-            $('#btn_subtrair').click(function() {
-                valorAtual += ' - ';
-                atualizarCampo();
-            });
-
-            $('#btn_multiplicar').click(function() {
-                valorAtual += ' * ';
-                atualizarCampo();
-            });
-
-            $('#btn_dividir').click(function() {
-                valorAtual += ' / ';
-                atualizarCampo();
-            });
-
-            // Adiciona ponto decimal
-            $('#btn_ponto').click(function() {
-                // Impede adicionar mais de um ponto
-                if (!valorAtual.includes('.')) {
-                    valorAtual += '.';
-                    atualizarCampo();
-                }
-            });
-
-            // Calcula o resultado
-            $('#btn_calcular').click(function() {
-                try {
-                    let resultado = eval(valorAtual); // Avalia a expressão
-                    valorAtual = resultado.toString(); // Converte o resultado para string
-                    atualizarCampo();
-                } catch (e) {
-                    valorAtual = 'Erro';
-                    atualizarCampo();
-                }
-            });
-
-            // Limpa o campo
-            $('#btn_limpar').click(function() {
-                valorAtual = '';
-                atualizarCampo();
-            });
-        });
-    </script>
+    <title>Calculadora em JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="button"] {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #result {
+            width: 230px;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <fieldset>
-        <legend>CALCULADORA</legend>
-        <input type="text" id="campo" readonly><br><br>
 
-        <!-- Botões numéricos -->
-        <button class="botao">1</button>
-        <button class="botao">2</button>
-        <button class="botao">3</button>
-        <button id="btn_somar">+</button><br><br>
+<div class="calculator">
+    <input type="text" id="result" disabled>
+    <br>
+    <input type="button" value="1" onclick="appendNumber(1)">
+    <input type="button" value="2" onclick="appendNumber(2)">
+    <input type="button" value="3" onclick="appendNumber(3)">
+    <input type="button" value="+" onclick="appendOperator('+')">
+    <br>
+    <input type="button" value="4" onclick="appendNumber(4)">
+    <input type="button" value="5" onclick="appendNumber(5)">
+    <input type="button" value="6" onclick="appendNumber(6)">
+    <input type="button" value="-" onclick="appendOperator('-')">
+    <br>
+    <input type="button" value="7" onclick="appendNumber(7)">
+    <input type="button" value="8" onclick="appendNumber(8)">
+    <input type="button" value="9" onclick="appendNumber(9)">
+    <input type="button" value="*" onclick="appendOperator('*')">
+    <br>
+    <input type="button" value="0" onclick="appendNumber(0)">
+    <input type="button" value="C" onclick="clearResult()">
+    <input type="button" value="=" onclick="calculate()">
+    <input type="button" value="/" onclick="appendOperator('/')">
+</div>
 
-        <button class="botao">4</button>
-        <button class="botao">5</button>
-        <button class="botao">6</button>
-        <button id="btn_subtrair">-</button><br><br>
+<script>
+    let resultField = document.getElementById("result");
+    let currentInput = "";
 
-        <button class="botao">7</button>
-        <button class="botao">8</button>
-        <button class="botao">9</button>
-        <button id="btn_multiplicar">*</button><br><br>
+    function appendNumber(number) {
+        currentInput += number;
+        resultField.value = currentInput;
+    }
 
-        <button class="botao">0</button>
-        <button id="btn_ponto">.</button>
-        <button id="btn_calcular">=</button>
-        <button id="btn_dividir">/</button><br><br>
+    function appendOperator(operator) {
+        currentInput += ` ${operator} `;
+        resultField.value = currentInput;
+    }
 
-        <!-- Botão de limpar -->
-        <button id="btn_limpar">C</button>
-    </fieldset>
+    function clearResult() {
+        currentInput = "";
+        resultField.value = "";
+    }
+
+    function calculate() {
+        try {
+            resultField.value = eval(currentInput);
+            currentInput = resultField.value; // Atualiza a entrada para o resultado
+        } catch (error) {
+            resultField.value = "Erro";
+        }
+    }
+</script>
+
 </body>
 </html>
